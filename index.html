@@ -1,8 +1,39 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+
+    <!-- Основные SEO-теги для России -->
+    <title>Генератор шелчков (метроном) — 0.1–400 Гц | 6–24 000 BPM онлайн</title>
+    <meta name="description"
+        content="Мощный онлайн-генератор шелчков и импульсов. Диапазон от 0.1 Гц (6 ударов/мин) до 400 Гц (24 000 BPM). Визуальный индикатор, точный звук Web Audio. Для медитации, экспериментов и настройки аппаратуры.">
+    <meta name="keywords"
+        content="генератор шелчков, метроном онлайн, генератор импульсов, генератор звуковых частот, BPM метроном, 400 Гц, 0.1 Гц, Web Audio метроном">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Павел Волков">
+    <meta name="yandex-verification" content="ваш_код_верификации"> <!-- Замените на свой код из Яндекс.Вебмастера -->
+
+    <!-- Только российские соцсети и мессенджеры -->
+    <meta property="og:title" content="Генератор шелчков | 0.1–400 Гц (6–24 000 BPM)">
+    <meta property="og:description"
+        content="Генератор точных звуковых импульсов: от редких ударов (6 в минуту) до звукового тона (400 Гц). Визуальный индикатор и регулировка частоты в реальном времени.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://volkovhl.github.io/click-generator/">
+    <meta property="og:site_name" content="Генератор шелчков">
+    <meta property="og:image" content="https://volkovhl.github.io/click-generator/screenshot-click.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- VK / OK -->
+    <meta property="vk:image" content="https://volkovhl.github.io/click-generator/screenshot-click.png">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
     <title>Генератор шелчков | 0.1–400 Гц (6–24000 BPM)</title>
     <style>
         * {
@@ -44,7 +75,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .sub {
@@ -83,8 +114,8 @@
             border-radius: 48px;
             padding: 1.4rem 1.5rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(255,215,150,0.3);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 4px 10px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 215, 150, 0.3);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .param-group {
@@ -95,6 +126,7 @@
             gap: 0.8rem;
             margin-bottom: 1.8rem;
         }
+
         .param-group:last-child {
             margin-bottom: 0;
         }
@@ -149,12 +181,15 @@
             transition: 0.1s;
             box-shadow: 0 2px 4px black;
         }
+
         .value-stepper button:active {
             transform: scale(0.94);
         }
+
         .value-stepper button.minus {
             background: #6d4c3c;
         }
+
         .value-stepper button.plus {
             background: #3c8f5e;
         }
@@ -224,7 +259,7 @@
             height: 70px;
             background: radial-gradient(circle, #3a6c8c, #1d3e52);
             border-radius: 50%;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,200,0.6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 200, 0.6);
             transition: 0.05s linear;
             display: flex;
             align-items: center;
@@ -236,7 +271,7 @@
 
         .beat-light.active {
             background: radial-gradient(circle, #ffb347, #ff7e05);
-            box-shadow: 0 0 18px #ffb347, inset 0 0 8px rgba(255,215,0,0.8);
+            box-shadow: 0 0 18px #ffb347, inset 0 0 8px rgba(255, 215, 0, 0.8);
             transform: scale(1.05);
         }
 
@@ -299,17 +334,21 @@
             .metronome-card {
                 padding: 1.5rem;
             }
+
             .param-group {
                 flex-direction: column;
                 align-items: stretch;
             }
+
             .control-block {
                 justify-content: space-between;
             }
+
             .value-stepper input {
                 width: 90px;
                 font-size: 1.2rem;
             }
+
             button {
                 padding: 8px 18px;
                 font-size: 1rem;
@@ -317,407 +356,403 @@
         }
     </style>
 </head>
+
 <body>
-<div class="metronome-card">
-    <h1>⚡ Генератор шелчков</h1>
-    <div class="sub">Инфранизкие до звуковых частот</div>
-    <div class="range-badge">
-        📡 0.1 Гц (6 BPM)  ──►  400 Гц (24 000 BPM)
-    </div>
-
-    <div class="warning">
-        ⚠️ ВНИМАНИЕ: при частоте >30–50 Гц щелчки сливаются в сплошной тон!<br>
-        При 0.1 Гц интервал между ударами — 10 секунд. Генератор стабилен во всём диапазоне.
-    </div>
-
-    <div class="tempo-panel">
-        <!-- BPM: удары в минуту 6..24000 -->
-        <div class="param-group">
-            <div class="param-label"><span>🥁</span> Удары в минуту (BPM)</div>
-            <div class="control-block">
-                <div class="value-stepper">
-                    <button class="minus" id="bpmMinus" type="button">−</button>
-                    <input type="number" id="bpmInput" step="1" value="120">
-                    <button class="plus" id="bpmPlus" type="button">+</button>
+    <div class="metronome-card">
+        <h1>⚡ Генератор шелчков</h1>
+        <div class="sub">Инфранизкие до звуковых частот</div>
+        <div class="range-badge">
+            📡 0.1 Гц (6 BPM) ──► 400 Гц (24 000 BPM)
+        </div>
+        <div class="tempo-panel">
+            <!-- BPM: удары в минуту 6..24000 -->
+            <div class="param-group">
+                <div class="param-label"><span>🥁</span> Удары в минуту (BPM)</div>
+                <div class="control-block">
+                    <div class="value-stepper">
+                        <button class="minus" id="bpmMinus" type="button">−</button>
+                        <input type="number" id="bpmInput" step="1" value="120">
+                        <button class="plus" id="bpmPlus" type="button">+</button>
+                    </div>
+                    <span class="unit-badge">BPM</span>
+                    <input type="range" id="bpmSlider" min="6" max="24000" step="1" value="120">
                 </div>
-                <span class="unit-badge">BPM</span>
-                <input type="range" id="bpmSlider" min="6" max="24000" step="1" value="120">
+            </div>
+
+            <!-- Удары в секунду (частота щелчков) 0.1..400 Гц -->
+            <div class="param-group">
+                <div class="param-label"><span>⏱️</span> Удары в секунду</div>
+                <div class="control-block">
+                    <div class="value-stepper">
+                        <button class="minus" id="hzMinus" type="button">−</button>
+                        <input type="number" id="hzInput" step="0.1" value="2.0">
+                        <button class="plus" id="hzPlus" type="button">+</button>
+                    </div>
+                    <span class="unit-badge">Гц (щелчков/с)</span>
+                    <input type="range" id="hzSlider" min="0.1" max="400" step="0.1" value="2.0">
+                </div>
+            </div>
+            <div class="sync-badge">
+                🔄 Полная синхронизация BPM ↔ Гц | Ввод чисел — без рывков (фиксация после завершения)
             </div>
         </div>
 
-        <!-- Удары в секунду (частота щелчков) 0.1..400 Гц -->
-        <div class="param-group">
-            <div class="param-label"><span>⏱️</span> Удары в секунду</div>
-            <div class="control-block">
-                <div class="value-stepper">
-                    <button class="minus" id="hzMinus" type="button">−</button>
-                    <input type="number" id="hzInput" step="0.1" value="2.0">
-                    <button class="plus" id="hzPlus" type="button">+</button>
-                </div>
-                <span class="unit-badge">Гц (щелчков/с)</span>
-                <input type="range" id="hzSlider" min="0.1" max="400" step="0.1" value="2.0">
-            </div>
+        <div class="visual-metronome">
+            <div class="beat-light" id="beatIndicator">🎧</div>
         </div>
-        <div class="sync-badge">
-            🔄 Полная синхронизация BPM ↔ Гц | Ввод чисел — без рывков (фиксация после завершения)
+
+        <div class="controls">
+            <button id="startBtn" class="btn-start">▶ СТАРТ</button>
+            <button id="stopBtn" class="btn-stop">⏹️ СТОП</button>
         </div>
+        <div class="status" id="statusMessage">
+            🎛️ Готов. Диапазон: 0.1–400 Гц (6–24000 BPM)
+        </div>
+        <footer>
+            🎚️ Звук — короткий «щелчок» (Web Audio)<br>
+            📉 При 0.1 Гц пауза 10 сек — работает точно | 📈 При 400 Гц интервал 2.5 мс
+        </footer>
     </div>
 
-    <div class="visual-metronome">
-        <div class="beat-light" id="beatIndicator">🎧</div>
-    </div>
+    <script>
+        (function () {
+            // DOM элементы
+            const bpmInput = document.getElementById('bpmInput');
+            const bpmSlider = document.getElementById('bpmSlider');
+            const hzInput = document.getElementById('hzInput');
+            const hzSlider = document.getElementById('hzSlider');
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const beatIndicator = document.getElementById('beatIndicator');
+            const statusSpan = document.getElementById('statusMessage');
 
-    <div class="controls">
-        <button id="startBtn" class="btn-start">▶ СТАРТ</button>
-        <button id="stopBtn" class="btn-stop">⏹️ СТОП</button>
-    </div>
-    <div class="status" id="statusMessage">
-        🎛️ Готов. Диапазон: 0.1–400 Гц (6–24000 BPM)
-    </div>
-    <footer>
-        🎚️ Звук — короткий «щелчок» (Web Audio)<br>
-        📉 При 0.1 Гц пауза 10 сек — работает точно | 📈 При 400 Гц интервал 2.5 мс
-    </footer>
-</div>
+            const bpmMinus = document.getElementById('bpmMinus');
+            const bpmPlus = document.getElementById('bpmPlus');
+            const hzMinus = document.getElementById('hzMinus');
+            const hzPlus = document.getElementById('hzPlus');
 
-<script>
-(function(){
-    // DOM элементы
-    const bpmInput = document.getElementById('bpmInput');
-    const bpmSlider = document.getElementById('bpmSlider');
-    const hzInput = document.getElementById('hzInput');
-    const hzSlider = document.getElementById('hzSlider');
-    const startBtn = document.getElementById('startBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const beatIndicator = document.getElementById('beatIndicator');
-    const statusSpan = document.getElementById('statusMessage');
-    
-    const bpmMinus = document.getElementById('bpmMinus');
-    const bpmPlus = document.getElementById('bpmPlus');
-    const hzMinus = document.getElementById('hzMinus');
-    const hzPlus = document.getElementById('hzPlus');
+            // Web Audio
+            let audioCtx = null;
+            let clickBuffer = null;
+            let gainNode = null;
+            const CLICK_VOLUME = 0.45;
 
-    // Web Audio
-    let audioCtx = null;
-    let clickBuffer = null;
-    let gainNode = null;
-    const CLICK_VOLUME = 0.45;
+            let isRunning = false;
+            let nextTimeoutId = null;
+            let currentIntervalMs = 500;      // миллисекунды между щелчками
+            let expectedTime = 0;
+            let visualTimer = null;
 
-    let isRunning = false;
-    let nextTimeoutId = null;
-    let currentIntervalMs = 500;      // миллисекунды между щелчками
-    let expectedTime = 0;
-    let visualTimer = null;
+            // ---- звук ----
+            function initAudioContext() {
+                if (audioCtx && audioCtx.state !== 'closed') return audioCtx;
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    gainNode = audioCtx.createGain();
+                    gainNode.gain.value = CLICK_VOLUME;
+                    gainNode.connect(audioCtx.destination);
+                    generateClickBuffer();
+                    return audioCtx;
+                } catch (e) {
+                    statusSpan.innerText = "❌ Web Audio не поддерживается";
+                    return null;
+                }
+            }
 
-    // ---- звук ----
-    function initAudioContext() {
-        if (audioCtx && audioCtx.state !== 'closed') return audioCtx;
-        try {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            gainNode = audioCtx.createGain();
-            gainNode.gain.value = CLICK_VOLUME;
-            gainNode.connect(audioCtx.destination);
-            generateClickBuffer();
-            return audioCtx;
-        } catch(e) {
-            statusSpan.innerText = "❌ Web Audio не поддерживается";
-            return null;
-        }
-    }
+            function generateClickBuffer() {
+                if (!audioCtx) return;
+                const sampleRate = audioCtx.sampleRate;
+                const duration = 0.035; // 35 мс короткий импульс
+                const bufferLength = sampleRate * duration;
+                const buffer = audioCtx.createBuffer(1, bufferLength, sampleRate);
+                const data = buffer.getChannelData(0);
+                const freq = 1850;
+                for (let i = 0; i < bufferLength; i++) {
+                    let t = i / sampleRate;
+                    let envelope = Math.exp(-t * 85);
+                    let osc = Math.sin(2 * Math.PI * freq * t);
+                    let noise = (Math.random() * 2 - 1) * 0.25 * envelope;
+                    let value = (osc * 0.8 + noise) * envelope;
+                    data[i] = Math.max(-1, Math.min(1, value));
+                }
+                clickBuffer = buffer;
+            }
 
-    function generateClickBuffer() {
-        if (!audioCtx) return;
-        const sampleRate = audioCtx.sampleRate;
-        const duration = 0.035; // 35 мс короткий импульс
-        const bufferLength = sampleRate * duration;
-        const buffer = audioCtx.createBuffer(1, bufferLength, sampleRate);
-        const data = buffer.getChannelData(0);
-        const freq = 1850;
-        for (let i = 0; i < bufferLength; i++) {
-            let t = i / sampleRate;
-            let envelope = Math.exp(-t * 85);
-            let osc = Math.sin(2 * Math.PI * freq * t);
-            let noise = (Math.random() * 2 - 1) * 0.25 * envelope;
-            let value = (osc * 0.8 + noise) * envelope;
-            data[i] = Math.max(-1, Math.min(1, value));
-        }
-        clickBuffer = buffer;
-    }
+            function playClick() {
+                if (!audioCtx || !clickBuffer || audioCtx.state !== 'running') return;
+                try {
+                    const source = audioCtx.createBufferSource();
+                    source.buffer = clickBuffer;
+                    source.connect(gainNode);
+                    source.start();
+                } catch (e) { }
+            }
 
-    function playClick() {
-        if (!audioCtx || !clickBuffer || audioCtx.state !== 'running') return;
-        try {
-            const source = audioCtx.createBufferSource();
-            source.buffer = clickBuffer;
-            source.connect(gainNode);
-            source.start();
-        } catch(e) {}
-    }
+            function flashIndicator() {
+                if (beatIndicator) {
+                    beatIndicator.classList.add('active');
+                    if (visualTimer) clearTimeout(visualTimer);
+                    visualTimer = setTimeout(() => {
+                        if (beatIndicator) beatIndicator.classList.remove('active');
+                    }, 80);
+                }
+            }
 
-    function flashIndicator() {
-        if (beatIndicator) {
-            beatIndicator.classList.add('active');
-            if (visualTimer) clearTimeout(visualTimer);
-            visualTimer = setTimeout(() => {
+            function beatTick() {
+                if (!isRunning) return;
+                playClick();
+                flashIndicator();
+            }
+
+            // Планировщик с компенсацией дрейфа, работает для любых интервалов от 2.5 мс до 10000 мс
+            function scheduleNextTick() {
+                if (!isRunning) return;
+                const now = performance.now();
+                if (!expectedTime) {
+                    expectedTime = now + currentIntervalMs;
+                } else {
+                    expectedTime = expectedTime + currentIntervalMs;
+                    const drift = now - expectedTime;
+                    if (Math.abs(drift) > currentIntervalMs * 0.3) {
+                        expectedTime = now + currentIntervalMs;
+                    } else if (drift > 2) {
+                        expectedTime = now + Math.max(1, currentIntervalMs - drift);
+                    }
+                }
+                let delay = expectedTime - performance.now();
+                delay = Math.max(0, delay);
+                nextTimeoutId = setTimeout(() => {
+                    if (isRunning) {
+                        beatTick();
+                        scheduleNextTick();
+                    }
+                }, delay);
+            }
+
+            function stopScheduler() {
+                if (nextTimeoutId) {
+                    clearTimeout(nextTimeoutId);
+                    nextTimeoutId = null;
+                }
+                isRunning = false;
+                expectedTime = 0;
+                if (visualTimer) clearTimeout(visualTimer);
                 if (beatIndicator) beatIndicator.classList.remove('active');
-            }, 80);
-        }
-    }
-
-    function beatTick() {
-        if (!isRunning) return;
-        playClick();
-        flashIndicator();
-    }
-
-    // Планировщик с компенсацией дрейфа, работает для любых интервалов от 2.5 мс до 10000 мс
-    function scheduleNextTick() {
-        if (!isRunning) return;
-        const now = performance.now();
-        if (!expectedTime) {
-            expectedTime = now + currentIntervalMs;
-        } else {
-            expectedTime = expectedTime + currentIntervalMs;
-            const drift = now - expectedTime;
-            if (Math.abs(drift) > currentIntervalMs * 0.3) {
-                expectedTime = now + currentIntervalMs;
-            } else if (drift > 2) {
-                expectedTime = now + Math.max(1, currentIntervalMs - drift);
             }
-        }
-        let delay = expectedTime - performance.now();
-        delay = Math.max(0, delay);
-        nextTimeoutId = setTimeout(() => {
-            if (isRunning) {
-                beatTick();
+
+            async function startMetronome() {
+                if (isRunning) return;
+                let ctx = initAudioContext();
+                if (!ctx) {
+                    statusSpan.innerText = "❌ Звук недоступен";
+                    return;
+                }
+                if (ctx.state === 'suspended') {
+                    try {
+                        await ctx.resume();
+                        if (!clickBuffer) generateClickBuffer();
+                    } catch (e) {
+                        statusSpan.innerText = "🔇 Разрешите звук, нажав кнопку ещё раз";
+                        return;
+                    }
+                }
+                if (ctx.state === 'closed') {
+                    audioCtx = null;
+                    ctx = initAudioContext();
+                    if (ctx && ctx.state === 'suspended') await ctx.resume();
+                    if (!clickBuffer && ctx) generateClickBuffer();
+                }
+                updateIntervalFromBpm();
+                isRunning = true;
+                expectedTime = 0;
+                beatTick(); // первый щелчок
                 scheduleNextTick();
+                let freq = (1000 / currentIntervalMs).toFixed(2);
+                statusSpan.innerText = `✅ Метроном активен | ${(60000 / currentIntervalMs).toFixed(1)} BPM • ${freq} Гц`;
             }
-        }, delay);
-    }
 
-    function stopScheduler() {
-        if (nextTimeoutId) {
-            clearTimeout(nextTimeoutId);
-            nextTimeoutId = null;
-        }
-        isRunning = false;
-        expectedTime = 0;
-        if (visualTimer) clearTimeout(visualTimer);
-        if (beatIndicator) beatIndicator.classList.remove('active');
-    }
-
-    async function startMetronome() {
-        if (isRunning) return;
-        let ctx = initAudioContext();
-        if (!ctx) {
-            statusSpan.innerText = "❌ Звук недоступен";
-            return;
-        }
-        if (ctx.state === 'suspended') {
-            try {
-                await ctx.resume();
-                if (!clickBuffer) generateClickBuffer();
-            } catch(e) {
-                statusSpan.innerText = "🔇 Разрешите звук, нажав кнопку ещё раз";
-                return;
+            function stopMetronome() {
+                if (!isRunning && nextTimeoutId === null) {
+                    statusSpan.innerText = "⏸️ Метроном уже остановлен";
+                    return;
+                }
+                stopScheduler();
+                statusSpan.innerText = "⏹️ Остановлено. Нажмите СТАРТ";
             }
-        }
-        if (ctx.state === 'closed') {
-            audioCtx = null;
-            ctx = initAudioContext();
-            if (ctx && ctx.state === 'suspended') await ctx.resume();
-            if (!clickBuffer && ctx) generateClickBuffer();
-        }
-        updateIntervalFromBpm();
-        isRunning = true;
-        expectedTime = 0;
-        beatTick(); // первый щелчок
-        scheduleNextTick();
-        let freq = (1000 / currentIntervalMs).toFixed(2);
-        statusSpan.innerText = `✅ Метроном активен | ${(60000/currentIntervalMs).toFixed(1)} BPM • ${freq} Гц`;
-    }
 
-    function stopMetronome() {
-        if (!isRunning && nextTimeoutId === null) {
-            statusSpan.innerText = "⏸️ Метроном уже остановлен";
-            return;
-        }
-        stopScheduler();
-        statusSpan.innerText = "⏹️ Остановлено. Нажмите СТАРТ";
-    }
-
-    function updateIntervalFromBpm() {
-        let bpm = parseFloat(bpmInput.value);
-        if (isNaN(bpm)) bpm = 120;
-        bpm = Math.min(24000, Math.max(6, bpm));
-        currentIntervalMs = 60000 / bpm;
-        return currentIntervalMs;
-    }
-
-    // ---- синхронизация BPM и Гц (0.1..400 Гц, 6..24000 BPM) ----
-    function syncFromBpm(bpmValue, updateSliders = true) {
-        let bpm = Math.min(24000, Math.max(6, parseFloat(bpmValue)));
-        if (isNaN(bpm)) bpm = 120;
-        bpm = Math.round(bpm * 10) / 10;
-        bpmInput.value = bpm;
-        if (updateSliders) bpmSlider.value = bpm;
-        
-        let hz = bpm / 60;
-        hz = Math.min(400, Math.max(0.1, hz));
-        hz = parseFloat(hz.toFixed(3));
-        hzInput.value = hz;
-        if (updateSliders) hzSlider.value = hz;
-        
-        updateIntervalFromBpm();
-        if (isRunning) restartSchedulerWithNewTempo();
-    }
-
-    function syncFromHz(hzValue, updateSliders = true) {
-        let hz = Math.min(400, Math.max(0.1, parseFloat(hzValue)));
-        if (isNaN(hz)) hz = 2.0;
-        hz = parseFloat(hz.toFixed(3));
-        hzInput.value = hz;
-        if (updateSliders) hzSlider.value = hz;
-        
-        let newBpm = hz * 60;
-        newBpm = Math.min(24000, Math.max(6, newBpm));
-        newBpm = Math.round(newBpm * 10) / 10;
-        bpmInput.value = newBpm;
-        if (updateSliders) bpmSlider.value = newBpm;
-        
-        updateIntervalFromBpm();
-        if (isRunning) restartSchedulerWithNewTempo();
-    }
-
-    function restartSchedulerWithNewTempo() {
-        if (!isRunning) return;
-        if (nextTimeoutId) {
-            clearTimeout(nextTimeoutId);
-            nextTimeoutId = null;
-        }
-        expectedTime = 0;
-        scheduleNextTick();
-        let freq = (1000 / currentIntervalMs).toFixed(2);
-        statusSpan.innerText = `🎚️ Темп изменён | ${(60000/currentIntervalMs).toFixed(1)} BPM • ${freq} Гц`;
-    }
-
-    // ---- обработчики (без мгновенной обрезки) ----
-    function onBpmSliderInput() {
-        let val = parseFloat(bpmSlider.value);
-        if (isNaN(val)) return;
-        syncFromBpm(val, true);
-    }
-    
-    function onHzSliderInput() {
-        let val = parseFloat(hzSlider.value);
-        if (isNaN(val)) return;
-        syncFromHz(val, true);
-    }
-    
-    function onBpmChange() {
-        let raw = bpmInput.value.trim();
-        if (raw === "") return;
-        let num = parseFloat(raw);
-        if (isNaN(num)) {
-            syncFromBpm(bpmSlider.value, true);
-            return;
-        }
-        syncFromBpm(num, true);
-    }
-    
-    function onHzChange() {
-        let raw = hzInput.value.trim();
-        if (raw === "") return;
-        let num = parseFloat(raw);
-        if (isNaN(num)) {
-            syncFromHz(hzSlider.value, true);
-            return;
-        }
-        syncFromHz(num, true);
-    }
-    
-    function stepBpm(delta) {
-        let current = parseFloat(bpmInput.value);
-        if (isNaN(current)) current = 120;
-        let newVal = current + delta;
-        newVal = Math.min(24000, Math.max(6, newVal));
-        syncFromBpm(newVal, true);
-    }
-    
-    function stepHz(delta) {
-        let current = parseFloat(hzInput.value);
-        if (isNaN(current)) current = 2.0;
-        let newVal = current + delta;
-        newVal = Math.min(400, Math.max(0.1, newVal));
-        newVal = Math.round(newVal * 100) / 100;
-        syncFromHz(newVal, true);
-    }
-    
-    async function handleStart() {
-        const ctx = initAudioContext();
-        if (!ctx) {
-            statusSpan.innerText = "⚠️ Web Audio не поддерживается";
-            return;
-        }
-        if (ctx.state === 'suspended') {
-            try {
-                await ctx.resume();
-                if (!clickBuffer) generateClickBuffer();
-            } catch(e) {
-                statusSpan.innerText = "🔇 Разрешите звук, нажав кнопку ещё раз";
-                return;
+            function updateIntervalFromBpm() {
+                let bpm = parseFloat(bpmInput.value);
+                if (isNaN(bpm)) bpm = 120;
+                bpm = Math.min(24000, Math.max(6, bpm));
+                currentIntervalMs = 60000 / bpm;
+                return currentIntervalMs;
             }
-        }
-        if (ctx.state === 'closed') {
-            audioCtx = null;
-            initAudioContext();
-            if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-            if (!clickBuffer && audioCtx) generateClickBuffer();
-        }
-        startMetronome();
-    }
-    
-    function handleStop() {
-        stopMetronome();
-    }
-    
-    // ---- инициализация ----
-    function setupEventListeners() {
-        bpmSlider.addEventListener('input', onBpmSliderInput);
-        hzSlider.addEventListener('input', onHzSliderInput);
-        bpmInput.addEventListener('change', onBpmChange);
-        bpmInput.addEventListener('blur', onBpmChange);
-        hzInput.addEventListener('change', onHzChange);
-        hzInput.addEventListener('blur', onHzChange);
-        bpmMinus.addEventListener('click', () => stepBpm(-1));
-        bpmPlus.addEventListener('click', () => stepBpm(1));
-        hzMinus.addEventListener('click', () => stepHz(-0.1));
-        hzPlus.addEventListener('click', () => stepHz(0.1));
-        startBtn.addEventListener('click', handleStart);
-        stopBtn.addEventListener('click', handleStop);
-    }
-    
-    function setDefaultValues() {
-        syncFromBpm(120, true);
-        const silentCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (silentCtx) {
-            audioCtx = silentCtx;
-            gainNode = audioCtx.createGain();
-            gainNode.gain.value = CLICK_VOLUME;
-            gainNode.connect(audioCtx.destination);
-            generateClickBuffer();
-        }
-        statusSpan.innerText = "🎛️ Диапазон: 0.1–400 Гц (6–24000 BPM)";
-    }
-    
-    setupEventListeners();
-    setDefaultValues();
-    
-    window.addEventListener('beforeunload', () => {
-        if (nextTimeoutId) clearTimeout(nextTimeoutId);
-        if (audioCtx && audioCtx.state !== 'closed') audioCtx.suspend();
-    });
-})();
-</script>
+
+            // ---- синхронизация BPM и Гц (0.1..400 Гц, 6..24000 BPM) ----
+            function syncFromBpm(bpmValue, updateSliders = true) {
+                let bpm = Math.min(24000, Math.max(6, parseFloat(bpmValue)));
+                if (isNaN(bpm)) bpm = 120;
+                bpm = Math.round(bpm * 10) / 10;
+                bpmInput.value = bpm;
+                if (updateSliders) bpmSlider.value = bpm;
+
+                let hz = bpm / 60;
+                hz = Math.min(400, Math.max(0.1, hz));
+                hz = parseFloat(hz.toFixed(3));
+                hzInput.value = hz;
+                if (updateSliders) hzSlider.value = hz;
+
+                updateIntervalFromBpm();
+                if (isRunning) restartSchedulerWithNewTempo();
+            }
+
+            function syncFromHz(hzValue, updateSliders = true) {
+                let hz = Math.min(400, Math.max(0.1, parseFloat(hzValue)));
+                if (isNaN(hz)) hz = 2.0;
+                hz = parseFloat(hz.toFixed(3));
+                hzInput.value = hz;
+                if (updateSliders) hzSlider.value = hz;
+
+                let newBpm = hz * 60;
+                newBpm = Math.min(24000, Math.max(6, newBpm));
+                newBpm = Math.round(newBpm * 10) / 10;
+                bpmInput.value = newBpm;
+                if (updateSliders) bpmSlider.value = newBpm;
+
+                updateIntervalFromBpm();
+                if (isRunning) restartSchedulerWithNewTempo();
+            }
+
+            function restartSchedulerWithNewTempo() {
+                if (!isRunning) return;
+                if (nextTimeoutId) {
+                    clearTimeout(nextTimeoutId);
+                    nextTimeoutId = null;
+                }
+                expectedTime = 0;
+                scheduleNextTick();
+                let freq = (1000 / currentIntervalMs).toFixed(2);
+                statusSpan.innerText = `🎚️ Темп изменён | ${(60000 / currentIntervalMs).toFixed(1)} BPM • ${freq} Гц`;
+            }
+
+            // ---- обработчики (без мгновенной обрезки) ----
+            function onBpmSliderInput() {
+                let val = parseFloat(bpmSlider.value);
+                if (isNaN(val)) return;
+                syncFromBpm(val, true);
+            }
+
+            function onHzSliderInput() {
+                let val = parseFloat(hzSlider.value);
+                if (isNaN(val)) return;
+                syncFromHz(val, true);
+            }
+
+            function onBpmChange() {
+                let raw = bpmInput.value.trim();
+                if (raw === "") return;
+                let num = parseFloat(raw);
+                if (isNaN(num)) {
+                    syncFromBpm(bpmSlider.value, true);
+                    return;
+                }
+                syncFromBpm(num, true);
+            }
+
+            function onHzChange() {
+                let raw = hzInput.value.trim();
+                if (raw === "") return;
+                let num = parseFloat(raw);
+                if (isNaN(num)) {
+                    syncFromHz(hzSlider.value, true);
+                    return;
+                }
+                syncFromHz(num, true);
+            }
+
+            function stepBpm(delta) {
+                let current = parseFloat(bpmInput.value);
+                if (isNaN(current)) current = 120;
+                let newVal = current + delta;
+                newVal = Math.min(24000, Math.max(6, newVal));
+                syncFromBpm(newVal, true);
+            }
+
+            function stepHz(delta) {
+                let current = parseFloat(hzInput.value);
+                if (isNaN(current)) current = 2.0;
+                let newVal = current + delta;
+                newVal = Math.min(400, Math.max(0.1, newVal));
+                newVal = Math.round(newVal * 100) / 100;
+                syncFromHz(newVal, true);
+            }
+
+            async function handleStart() {
+                const ctx = initAudioContext();
+                if (!ctx) {
+                    statusSpan.innerText = "⚠️ Web Audio не поддерживается";
+                    return;
+                }
+                if (ctx.state === 'suspended') {
+                    try {
+                        await ctx.resume();
+                        if (!clickBuffer) generateClickBuffer();
+                    } catch (e) {
+                        statusSpan.innerText = "🔇 Разрешите звук, нажав кнопку ещё раз";
+                        return;
+                    }
+                }
+                if (ctx.state === 'closed') {
+                    audioCtx = null;
+                    initAudioContext();
+                    if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+                    if (!clickBuffer && audioCtx) generateClickBuffer();
+                }
+                startMetronome();
+            }
+
+            function handleStop() {
+                stopMetronome();
+            }
+
+            // ---- инициализация ----
+            function setupEventListeners() {
+                bpmSlider.addEventListener('input', onBpmSliderInput);
+                hzSlider.addEventListener('input', onHzSliderInput);
+                bpmInput.addEventListener('change', onBpmChange);
+                bpmInput.addEventListener('blur', onBpmChange);
+                hzInput.addEventListener('change', onHzChange);
+                hzInput.addEventListener('blur', onHzChange);
+                bpmMinus.addEventListener('click', () => stepBpm(-1));
+                bpmPlus.addEventListener('click', () => stepBpm(1));
+                hzMinus.addEventListener('click', () => stepHz(-0.1));
+                hzPlus.addEventListener('click', () => stepHz(0.1));
+                startBtn.addEventListener('click', handleStart);
+                stopBtn.addEventListener('click', handleStop);
+            }
+
+            function setDefaultValues() {
+                syncFromBpm(120, true);
+                const silentCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (silentCtx) {
+                    audioCtx = silentCtx;
+                    gainNode = audioCtx.createGain();
+                    gainNode.gain.value = CLICK_VOLUME;
+                    gainNode.connect(audioCtx.destination);
+                    generateClickBuffer();
+                }
+                statusSpan.innerText = "🎛️ Диапазон: 0.1–400 Гц (6–24000 BPM)";
+            }
+
+            setupEventListeners();
+            setDefaultValues();
+
+            window.addEventListener('beforeunload', () => {
+                if (nextTimeoutId) clearTimeout(nextTimeoutId);
+                if (audioCtx && audioCtx.state !== 'closed') audioCtx.suspend();
+            });
+        })();
+    </script>
 </body>
+
 </html>
